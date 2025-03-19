@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  title: Taxi API
+  version: 1.0.0
+servers:
+  - url: 'http://127.0.0.1:8000'
+paths:
+  /clients/:
+    get:
+      tags:
+      - "Client"
+      summary: Get a list of clients
+      responses:
+        '200':
+          description: Successful response
+    post:
+      tags:
+      - "Client"
+      summary: Create a new client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '201':
+          description: Client created successfully
+  /clients/{id}:
+    get:
+      tags:
+      - "Client"
+      summary: Get details of a client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the client
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+    put:
+      tags:
+      - "Client"
+      summary: Update a client information
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the client
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        200:
+          description: Client updated successfully
+        400:
+          description: Bad request
+        404:
+          description: Not found
+    delete:
+      tags:
+      - "Client"
+      summary: Delete a client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the client
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Client deleted successfully
+        '404':
+          description: Not found
+  /drivers/:
+    get:
+      tags:
+      - "Driver"
+      summary: Get a list of drivers
+      responses:
+        '200':
+          description: Successful response
+    post:
+      tags:
+      - "Driver"
+      summary: Create a new sriver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Driver'
+      responses:
+        '201':
+          description: Driver created successfully
+  /drivers/{id}:
+    get:
+      tags:
+      - "Driver"
+      summary: Get details of a driver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the driver
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+    put:
+      tags:
+      - "Driver"
+      summary: Update a driver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the driver
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Driver'
+      responses:
+        '200':
+          description: Driver updated successfully
+        '404':
+          description: Not found
+        '400':
+          description: Bad request
+    delete:
+      tags:
+      - "Driver"
+      summary: Delete a driver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the driver
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Driver deleted successfully
+        '404':
+          description: Not found
+  /orders/:
+    get:
+      tags:
+      - "Order"
+      summary: Get a list of orders
+      responses:
+        '200':
+          description: Successful response
+    post:
+      tags:
+      - "Order"
+      summary: Create a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order created successfully
+  /orders/{id}:
+    get:
+      tags:
+      - "Order"
+      summary: Get details of an order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the order
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+    put:
+      tags:
+      - "Order"
+      summary: Update an order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the order
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order updated successfully
+        '404':
+          description: Not found
+        '400':
+          description: Bad request
+    delete:
+      tags:
+      - "Order"
+      summary: Delete an order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the order
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Order deleted successfully
+        '404':
+          description: Not found
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        start_address:
+          type: string
+        final_address:
+          type: string
+        client_delayed:
+          type: boolean
+        driver_id:
+          type: integer
+        client_id:
+          type: integer
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        surname:
+          type: string
+        phone_number:
+          type: string
+    Driver:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        surname:
+          type: string
+        phone_number:
+          type: string
+        license_number:
+          type: string
+        rating:
+          type: number
+
